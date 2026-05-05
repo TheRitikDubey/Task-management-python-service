@@ -3,7 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from app.core.config import settings
 from app.api.v1 import api_v1_router
+from app.core.database import Base, engine
 
+# Create Tables
+Base.metadata.create_all(bind=engine)
 # Create FastAPI app instance
 app = FastAPI(
     title=settings.app_name,

@@ -4,7 +4,7 @@ from typing import Optional
 
 class Settings(BaseSettings):
     # Application settings
-    app_name: str = "FastAPI Service"
+    app_name: str = "Task Management Service"
     app_version: str = "1.0.0"
     debug: bool = False
 
@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     port: int = 8000
 
     # Database settings
-    database_url: str = "postgresql://user:password@localhost/dbname"
+    DATABASE_URL: str = "postgresql://postgres:password@localhost:5432/fastapi_db"
     db_echo: bool = False
 
     # JWT settings
