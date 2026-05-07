@@ -22,8 +22,7 @@ def get_projects(user_id: int, db: Session = Depends(get_db)):
         logger.error(f"Failed to get projects for user_id {user_id}: {e}")
         raise HTTPException(status_code=500, detail="Failed to retrieve projects")
 
-
-
+# Add new project in our project table and user table
 @router.post("/add", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED)
 def add_project(project: ProjectCreate, db: Session = Depends(get_db)):
     logger.info(f"Adding project: {project.title}, user_id: {project.user_id}")
