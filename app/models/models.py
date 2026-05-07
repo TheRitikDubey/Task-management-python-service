@@ -30,16 +30,17 @@ class Project(Base):
     __tablename__ = "projects"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
+    title = Column(String, index=True)
     project_owner_name = Column(String)
     description = Column(String)
     user_id = Column(Integer, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
+# This table represents the many-to-many relationship between projects and users. A project can have multiple users, and a user can be part of multiple projects.
 class ProjectUser(Base):
     __tablename__ = "project_users"
-    # uniquie identifier for the project user relationship
+    # unique identifier for the project user relationship
     id = Column(Integer, primary_key=True, index=True)
     project_id = Column(Integer, index=True)
     user_id = Column(Integer, index=True)
