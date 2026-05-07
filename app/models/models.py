@@ -31,11 +31,16 @@ class Project(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
-
-    project_owner_id = Column(Integer, index=True)
     project_owner_name = Column(String)
-    project_users = Column(String)  # Comma-separated user IDs
     description = Column(String)
     user_id = Column(Integer, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+class ProjectUser(Base):
+    __tablename__ = "project_users"
+    # uniquie identifier for the project user relationship
+    id = Column(Integer, primary_key=True, index=True)
+    project_id = Column(Integer, index=True)
+    user_id = Column(Integer, index=True)
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
