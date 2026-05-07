@@ -48,13 +48,12 @@ class TaskResponse(TaskBase):
         from_attributes = True
 
 class ProjectBase(BaseModel):
-    name: str
+    title: str
     description: Optional[str] = None
     project_owner_name: str
 
 class ProjectCreate(BaseModel):
     title: str
-    name: str
     project_owner_name: str
     description: str
     user_id: int

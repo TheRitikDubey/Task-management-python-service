@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.sql import func
 from app.core.database import Base
+from datetime import datetime
 
 
 class User(Base):
@@ -34,14 +35,13 @@ class Project(Base):
     project_owner_name = Column(String)
     description = Column(String)
     user_id = Column(Integer, index=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
+    created_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=True)
 # This table represents the many-to-many relationship between projects and users. A project can have multiple users, and a user can be part of multiple projects.
 class ProjectUser(Base):
     __tablename__ = "project_users"
     # unique identifier for the project user relationship
     id = Column(Integer, primary_key=True, index=True)
     project_id = Column(Integer, index=True)
-    user_id = Column(Integer, index=True)
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    user_id = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=True)
