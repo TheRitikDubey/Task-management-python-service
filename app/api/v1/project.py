@@ -15,8 +15,10 @@ router = APIRouter(prefix="/projects", tags=["projects"])
 # Get all projects for a user
 @router.get("/user", response_model=list[ProjectResponse])
 def get_projects(user_id: int, db: Session = Depends(get_db)):
+    print(f"Getting projects for user_id: {user_id}")
     try:
         projects = db.query(Project).join(ProjectUser, Project.id == ProjectUser.project_id).filter(ProjectUser.user_id == user_id).all()
+        print(f"Retrieved {projects} projects for user_id {user_id}")
         return projects
     except Exception as e:
         logger.error(f"Failed to get projects for user_id {user_id}: {e}")

@@ -61,11 +61,11 @@ class ProjectCreate(BaseModel):
 class ProjectResponse(ProjectBase):
     id: int
     user_id: int
-    title: str
+    title: str | None
     description: Optional[str] = None
     project_owner_name: str
     created_at: datetime
-    updated_at: datetime
+    updated_at: datetime | None
 
     class Config:
         from_attributes = True
