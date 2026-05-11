@@ -8,7 +8,7 @@ router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 
 # Version 1 controllers
-@router.post("/", response_model=TaskResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/add", response_model=TaskResponse, status_code=status.HTTP_201_CREATED)
 def create_task(task: TaskCreate, user_id: int, db: Session = Depends(get_db)):
     db_task = Task(title=task.title, description=task.description, user_id=user_id)
     db.add(db_task)
